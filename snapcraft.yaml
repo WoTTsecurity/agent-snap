@@ -1,0 +1,23 @@
+name: wott-agent
+version: '0.1'
+summary: Web of Trusted Things agent.
+description: |
+  tl;dr - WoTT Agent is the Let's Encrypt for IoT.
+
+grade: stable
+confinement: strict
+
+apps:
+  wott-agent:
+    command: wott-agent
+    daemon: oneshot
+    plugs:
+      - network
+    passthrough:
+      timer: 00:00-24:00/24
+parts:
+  wott-agent:
+    plugin: python
+    source: https://github.com/WoTTsecurity/agent.git
+    requirements: requirements.txt
+    python-version: python3
