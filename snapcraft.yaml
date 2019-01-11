@@ -20,4 +20,8 @@ parts:
     plugin: python
     source: https://github.com/WoTTsecurity/agent.git
     requirements: requirements.txt
+    build-packages:
+      - libssl-dev
+      - libffi-dev
+      - libltdl-dev
     python-version: python3
