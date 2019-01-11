@@ -20,6 +20,8 @@ parts:
     plugin: python
     source: https://github.com/WoTTsecurity/agent.git
     requirements: requirements.txt
+    stage:
+      - libffi-dev
     build-packages:
       - libssl-dev
       - libffi-dev
