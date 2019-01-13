@@ -8,13 +8,19 @@ grade: stable
 confinement: strict
 
 apps:
-  wott-agent:
+  wott-agent-daemon:
     command: wott-agent
     daemon: oneshot
     plugs:
       - network
     passthrough:
       timer: 00:00-24:00/24
+
+  wott-agent:
+    command: wott-agent
+    plugs:
+      - network
+
 parts:
   wott-agent:
     plugin: python
