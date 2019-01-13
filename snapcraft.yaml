@@ -24,4 +24,5 @@ parts:
     build-packages:
       - libssl-dev
       - libffi-dev
+      - libffi6
       - libltdl-dev
