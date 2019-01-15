@@ -1,5 +1,5 @@
 name: wott-agent
-version: '0.1.2'
+version: '0.1.3'
 summary: Web of Trusted Things agent.
 description: |
   tl;dr - WoTT Agent is the Let's Encrypt for IoT.
@@ -8,7 +8,7 @@ grade: stable
 confinement: strict
 
 apps:
-  wott-agent-daemon:
+  daemon:
     command: wott-agent
     daemon: oneshot
     plugs:
@@ -20,6 +20,12 @@ apps:
     command: wott-agent
     plugs:
       - network
+
+  ghostunnel:
+    command: ghostunnel
+    plugs:
+      - network
+      - network-bind
 
 parts:
   wott-agent:
@@ -33,4 +39,23 @@ parts:
       - libssl-dev
       - libffi-dev
       - libffi6
-      - libltdl-dev
+  ghostunnel:
+    after: [go]
+    source: https://github.com/square/ghostunnel.git
+    source-tag: v1.3.0
+    source-type: git
+    plugin: dump
+    build-packages:
+    - make
+    - libltdl-dev
+    override-build: |
+      set -xe
+      export GOPATH="$(dirname $(pwd))"/go
+      mkdir -p $GOPATH $GOPATH/src/github.com/square
+      ln -s "$(dirname $(pwd))"/src $GOPATH/src/github.com/square/ghostunnel
+      cd $GOPATH/src/github.com/square/ghostunnel && make
+      mkdir $SNAPCRAFT_PART_INSTALL/bin
+      cp $GOPATH/src/github.com/square/ghostunnel/ghostunnel $SNAPCRAFT_PART_INSTALL/bin/
+  go:
+    source-tag: go1.11
+    source-depth: 1
