@@ -9,6 +9,11 @@ Packages the WoTT Agent into a Snap.
 $ snap install wott-agent
 ```
 
+##Running
+```
+$snap start wott-agent
+```
+
 ## Building
 
 
