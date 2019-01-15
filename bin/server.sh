@@ -10,4 +10,4 @@ ghostunnel server \
     --target 127.0.0.1:${TARGET_PORT:-8080} \
     --keystore "$SNAP_DATA/combined.pem" \
     --cacert "$SNAP_DATA/ca.crt" \
-    ${CONNECTION_POLICY:---allow-all}
+    ${CONNECTION_POLICY:---allow-all} $@
