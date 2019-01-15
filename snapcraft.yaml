@@ -29,9 +29,18 @@ apps:
 
   server:
     command: server.sh
+    plugs:
+      - network
+      - network-bind
 
   client:
     command: client.sh
+    plugs:
+      - network
+      - network-bind
+
+  whoami:
+    command: python3 -c 'import agent; print(agent.get_device_id())'
 
 parts:
   wott-agent:
