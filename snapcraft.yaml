@@ -42,6 +42,15 @@ apps:
   whoami:
     command: python3 -c 'import agent; print(agent.get_device_id())'
 
+  verify-cert:
+    command: openssl verify -CAfile "$SNAP_DATA/ca.crt" "$SNAP_DATA/client.crt"
+
+  inspect-cert:
+    command: openssl x509 -in "$SNAP_DATA/client.crt" -text -noout
+
+  test-cert:
+    command: curl -s --cacert "$SNAP_DATA/ca.crt" --cert "$SNAP_DATA/client.crt" --key "$SNAP_DAT/client.key" https://mtls.wott.io/v0.2/hello | python -m json.tool
+
 parts:
   wott-agent:
     plugin: python
@@ -49,7 +58,7 @@ parts:
     source: https://github.com/WoTTsecurity/agent.git
     requirements: requirements.txt
     source-type: git
-    source-commit: b176349c45338f3adde3fde2c43e260639684033
+    source-commit: a6ebe421f7bf420f2c9fc9db93f16290a5ae24ce
     build-packages:
       - libssl-dev
       - libffi-dev
