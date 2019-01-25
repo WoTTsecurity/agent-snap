@@ -49,7 +49,7 @@ apps:
     command: openssl x509 -in "$SNAP_DATA/client.crt" -text -noout
 
   test-cert:
-    command: curl -s --cacert "$SNAP_DATA/ca.crt" --cert "$SNAP_DATA/client.crt" --key "$SNAP_DAT/client.key" https://mtls.wott.io/v0.2/hello | python -m json.tool
+    command: python3 -c 'import agent; print(agent.say_hello())'
 
 parts:
   wott-agent:
@@ -58,7 +58,7 @@ parts:
     source: https://github.com/WoTTsecurity/agent.git
     requirements: requirements.txt
     source-type: git
-    source-commit: a6ebe421f7bf420f2c9fc9db93f16290a5ae24ce
+    source-commit: 26a3b8b0931a621da8187d5f7c07feb529894098
     build-packages:
       - libssl-dev
       - libffi-dev
