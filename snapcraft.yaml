@@ -58,7 +58,7 @@ parts:
     source: https://github.com/WoTTsecurity/agent.git
     requirements: requirements.txt
     source-type: git
-    source-commit: 67ee3d4b4dec247faf557bffc26554ed7c3bc038
+    source-commit: 8826b6c2d397fe5375c806b5ade04f9077eaa5ed
     build-packages:
       - libssl-dev
       - libffi-dev
