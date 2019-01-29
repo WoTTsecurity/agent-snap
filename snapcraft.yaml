@@ -1,5 +1,5 @@
 name: wott-agent
-version: '0.1.8'
+version: '0.1.9'
 summary: Web of Trusted Things agent.
 description: |
   tl;dr - WoTT Agent is the Let's Encrypt for IoT.
@@ -13,6 +13,7 @@ apps:
     daemon: oneshot
     plugs:
       - network
+      - network-observe
     passthrough:
       timer: 00:00-24:00/24
 
@@ -20,6 +21,7 @@ apps:
     command: wott-agent
     plugs:
       - network
+      - network-observe
 
   ghostunnel:
     command: ghostunnel
