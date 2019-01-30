@@ -1,5 +1,5 @@
 name: wott-agent
-version: '0.1.9'
+version: '0.1.10'
 summary: Web of Trusted Things agent.
 description: |
   tl;dr - WoTT Agent is the Let's Encrypt for IoT.
@@ -14,6 +14,8 @@ apps:
     plugs:
       - network
       - network-observe
+      - hardware-observe
+      - tpm
     passthrough:
       timer: 00:00-24:00/24
 
@@ -53,6 +55,13 @@ apps:
   test-cert:
     command: python3 -c 'import agent; print(agent.say_hello())'
 
+slots:
+  wott-certs:
+    content: wott-certs
+    interface: content
+    read:
+      - $SNAP_DATA
+
 parts:
   wott-agent:
     plugin: python
@@ -60,7 +69,7 @@ parts:
     source: https://github.com/WoTTsecurity/agent.git
     requirements: requirements.txt
     source-type: git
-    source-commit: beefba9403cfdb8bb75f72657456187cf4257302
+    source-commit: 8f97c9bcd6a329e945d88f2127ea96b96a85660f
     build-packages:
       - libssl-dev
       - libffi-dev
