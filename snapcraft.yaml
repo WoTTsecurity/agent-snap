@@ -1,5 +1,5 @@
 name: wott-agent
-version: '0.1.11'
+version: '0.1.12'
 summary: Web of Trusted Things agent.
 description: |
   tl;dr - WoTT Agent is the Let's Encrypt for IoT.
@@ -69,7 +69,7 @@ parts:
     source: https://github.com/WoTTsecurity/agent.git
     requirements: requirements.txt
     source-type: git
-    source-commit: 92e9deee6b2c7e6c4c937da899164be3b7b80766
+    source-commit: 2c8bae828af5a17167ab31ff9385675dd99f09b5
     build-packages:
       - libssl-dev
       - libffi-dev
