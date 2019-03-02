@@ -55,6 +55,9 @@ apps:
   test-cert:
     command: python3 -c 'import agent; print(agent.say_hello())'
 
+  portscan:
+    command: python3 -c 'import agent; print(agent.get_open_ports())'
+
 slots:
   wott-certs:
     content: wott-certs
@@ -69,11 +72,13 @@ parts:
     source: https://github.com/WoTTsecurity/agent.git
     requirements: requirements.txt
     source-type: git
-    source-commit: 2c8bae828af5a17167ab31ff9385675dd99f09b5
+    source-commit: f7a07c54e03ae613f240165ee03a01b5fa287d38
     build-packages:
       - libssl-dev
       - libffi-dev
       - libffi6
+    stage-packages:
+      - nmap
 
   ghostunnel:
     after: [go]
