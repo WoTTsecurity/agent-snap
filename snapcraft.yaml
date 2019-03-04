@@ -1,5 +1,5 @@
 name: wott-agent
-version: '0.1.13'
+version: '0.1.13.1'
 summary: Web of Trusted Things agent.
 description: |
   tl;dr - WoTT Agent is the Let's Encrypt for IoT.
@@ -79,6 +79,7 @@ parts:
       - libffi6
     stage-packages:
       - nmap
+      - libblas3
 
   ghostunnel:
     after: [go]
