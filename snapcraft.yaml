@@ -1,5 +1,5 @@
 name: wott-agent
-version: '0.1.13.1'
+version: '0.1.13.2'
 summary: Web of Trusted Things agent.
 description: |
   tl;dr - WoTT Agent is the Let's Encrypt for IoT.
@@ -80,7 +80,14 @@ parts:
     stage-packages:
       - nmap
       - libblas3
-
+    install: |
+      set -ex
+      for dir in $SNAPCRAFT_PART_INSTALL/usr/lib/*/; do
+        (cd $dir;
+         if [ -f blas/libblas.so.3.* ]; then
+           ln -s blas/libblas.so.3.* libblas.so.3
+         fi)
+      done
   ghostunnel:
     after: [go]
     source: https://github.com/square/ghostunnel.git
