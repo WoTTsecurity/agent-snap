@@ -97,7 +97,6 @@ parts:
       - libpcap0.8
       - libpcre3
       - libssh2-1
-      - libssl1.1
       - lua-lpeg
       - zlib1g
   ghostunnel:
