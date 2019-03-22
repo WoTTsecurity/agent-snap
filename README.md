@@ -12,9 +12,11 @@ $ snap install wott-agent
 ## Building (locally)
 
 ```
-$ snapcraft cleanbuild
+$ sudo snap install snapcraft --classic
+$ snapcraft
 ```
 
+Detailed instructions can be found [here](https://forum.snapcraft.io/t/snapcraft-overview/8940).
 
 ## Release management
 
