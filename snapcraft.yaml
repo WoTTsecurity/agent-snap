@@ -1,9 +1,9 @@
 name: wott-agent
-version: '0.1.13.6'
+version: '0.1.13.9'
 summary: Web of Trusted Things agent.
 description: |
   tl;dr - WoTT Agent is the Let's Encrypt for IoT.
-
+base: core18
 grade: stable
 confinement: strict
 
@@ -19,12 +19,16 @@ apps:
       - tpm
     passthrough:
       timer: 00:00-24:00/24
+    environment:
+      XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
 
   wott-agent:
     command: wott-agent
     plugs:
       - network
       - network-observe
+    environment:
+      XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
 
   ghostunnel:
     command: ghostunnel
@@ -65,6 +69,8 @@ apps:
 
   portscan:
     command: python3 -c 'import agent; print(agent.get_open_ports())'
+    environment:
+      XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
 
 slots:
   wott-certs:
@@ -78,13 +84,17 @@ parts:
     plugin: python
     python-version: python3
     source: https://github.com/WoTTsecurity/agent.git
-    requirements: requirements.txt
+    requirements:
+    - requirements.txt
     source-type: git
-    source-commit: f7a07c54e03ae613f240165ee03a01b5fa287d38
+    source-commit: 9154c82be9b5b0f6801e2bda452fbe693bdadb99
     build-packages:
       - libffi-dev
       - libffi6
       - libssl-dev
+    stage-packages:
+      - libxtables12
+      - iptables
 
   nmap:
     build-packages: [g++]
@@ -93,29 +103,17 @@ parts:
     source-type: git
 
   ghostunnel:
-    after: [go]
+    plugin: go
     source: https://github.com/square/ghostunnel.git
     source-tag: v1.3.0
-    source-type: git
-    plugin: dump
+    go-importpath: github.com/square/ghostunnel
     build-packages:
-      - make
+      - build-essential
+    stage-packages:
       - libltdl-dev
-    override-build: |
-      set -xe
-      export GOPATH="$(dirname $(pwd))"/go
-      mkdir -p $GOPATH $GOPATH/src/github.com/square
-      ln -s "$(dirname $(pwd))"/src $GOPATH/src/github.com/square/ghostunnel
-      cd $GOPATH/src/github.com/square/ghostunnel && make
-      mkdir $SNAPCRAFT_PART_INSTALL/bin
-      cp $GOPATH/src/github.com/square/ghostunnel/ghostunnel $SNAPCRAFT_PART_INSTALL/bin/
 
   tools:
     source: bin/
     plugin: dump
     organize:
         '*': bin/
-
-  go:
-    source-tag: go1.11
-    source-depth: 1
