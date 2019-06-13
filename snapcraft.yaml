@@ -6,6 +6,11 @@ description: |
 base: core18
 grade: stable
 confinement: strict
+architectures:
+  - armhf
+  - arm64
+  - amd64
+  - i386
 
 apps:
   daemon:
@@ -87,7 +92,7 @@ parts:
     requirements:
     - requirements.txt
     source-type: git
-    source-commit: 9154c82be9b5b0f6801e2bda452fbe693bdadb99
+    source-commit: 7b399029c8da911bd1ef46aabe1079ce815f71b4
     build-packages:
       - libffi-dev
       - libffi6
@@ -95,12 +100,6 @@ parts:
     stage-packages:
       - libxtables12
       - iptables
-
-  nmap:
-    build-packages: [g++]
-    plugin: autotools
-    source: https://github.com/nmap/nmap
-    source-type: git
 
   ghostunnel:
     plugin: go
