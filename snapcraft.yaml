@@ -74,6 +74,7 @@ parts:
     source-type: git
     source-commit: 7b399029c8da911bd1ef46aabe1079ce815f71b4
     build-packages:
+      - python3-git
       - libffi-dev
       - libffi6
       - libssl-dev
