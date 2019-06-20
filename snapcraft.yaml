@@ -78,6 +78,8 @@ parts:
       - libffi-dev
       - libffi6
       - libssl-dev
+    build-environment:
+      - PYTHONPATH: /usr/lib/python3/dist-packages
 
   ghostunnel:
     after: [go]
