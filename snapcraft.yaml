@@ -75,10 +75,14 @@ parts:
     source-branch: fix-snap
     build-packages:
       - python3-git
+      - python3-iptables
       - libffi-dev
       - libffi6
       - libssl-dev
       - pkg-config
+      - libsystemd0
+      - libsystemd-dev
+      - iptables
 
   ghostunnel:
     after: [go]
