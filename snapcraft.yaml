@@ -78,10 +78,8 @@ parts:
       - libffi-dev
       - libffi6
       - libssl-dev
-    build-environment:
-      - PYTHONPATH: /usr/lib/python3/dist-packages
 
-  ghostunnel:
+ghostunnel:
     after: [go]
     source: https://github.com/square/ghostunnel.git
     source-tag: v1.3.0
