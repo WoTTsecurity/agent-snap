@@ -69,10 +69,10 @@ parts:
   wott-agent:
     plugin: python
     python-version: python3
-    source: https://github.com/WoTTsecurity/agent.git
+    source: https://github.com/GreatFruitOmsk/agent.git
     requirements: requirements.txt
     source-type: git
-    source-commit: 7b399029c8da911bd1ef46aabe1079ce815f71b4
+    source-branch: fix-snap
     build-packages:
       - python3-git
       - libffi-dev
