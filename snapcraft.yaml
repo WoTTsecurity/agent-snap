@@ -78,6 +78,7 @@ parts:
       - libffi-dev
       - libffi6
       - libssl-dev
+      - pkg-config
 
   ghostunnel:
     after: [go]
