@@ -85,28 +85,12 @@ parts:
       - iptables
 
   ghostunnel:
-    after: [go]
-    source: https://github.com/square/ghostunnel.git
+    plugin: go
+    go-importpath: github.com/square/ghostunnel
+    source: .
     source-tag: v1.3.0
     source-type: git
-    plugin: dump
     build-packages:
       - make
       - libltdl-dev
-    override-build: |
-      set -xe
-      export GOPATH="$(dirname $(pwd))"/go
-      mkdir -p $GOPATH $GOPATH/src/github.com/square
-      ln -s "$(dirname $(pwd))"/src $GOPATH/src/github.com/square/ghostunnel
-      cd $GOPATH/src/github.com/square/ghostunnel && make
-      mkdir $SNAPCRAFT_PART_INSTALL/bin
-      cp $GOPATH/src/github.com/square/ghostunnel/ghostunnel $SNAPCRAFT_PART_INSTALL/bin/
-  tools:
-    source: bin/
-    plugin: dump
-    organize:
-        '*': bin/
-
-  go:
-    source-tag: go1.11
-    source-depth: 1
+      - gcc
