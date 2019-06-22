@@ -6,6 +6,11 @@ description: |
 grade: stable
 confinement: strict
 base: core18
+architectures:	
+  - armhf	
+  - arm64	
+  - amd64	
+  - i386
 
 apps:
   daemon:
@@ -71,7 +76,8 @@ parts:
     plugin: python
     python-version: python3
     source: https://github.com/GreatFruitOmsk/agent.git
-    requirements: requirements.txt
+    requirements:
+      - requirements.txt
     source-type: git
     source-branch: fix-snap
     build-packages:
@@ -82,6 +88,7 @@ parts:
       - pkg-config
       - libsystemd0
       - libsystemd-dev
+    stage-packages:
       - iptables
 
   ghostunnel:
@@ -91,6 +98,7 @@ parts:
     source-tag: v1.3.0
     source-type: git
     build-packages:
-      - make
+      - build-essential
+    stage-packages:
       - libltdl-dev
-      - gcc
+
