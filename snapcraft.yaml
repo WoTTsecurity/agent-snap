@@ -99,3 +99,9 @@ parts:
     build-packages:
       - build-essential
       - libltdl-dev
+      
+  tools:
+    source: bin/
+    plugin: dump
+    organize:
+        '*': bin/
