@@ -98,6 +98,4 @@ parts:
     source-tag: v1.3.0
     build-packages:
       - build-essential
-    stage-packages:
       - libltdl-dev
-
