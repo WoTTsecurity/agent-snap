@@ -94,7 +94,7 @@ parts:
   ghostunnel:
     plugin: go
     go-importpath: github.com/square/ghostunnel
-    source: .
+    source: https://github.com/square/ghostunnel.git
     source-tag: v1.3.0
     build-packages:
       - build-essential
