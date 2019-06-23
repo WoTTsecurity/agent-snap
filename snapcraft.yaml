@@ -96,7 +96,6 @@ parts:
     go-importpath: github.com/square/ghostunnel
     source: .
     source-tag: v1.3.0
-    source-type: git
     build-packages:
       - build-essential
     stage-packages:
