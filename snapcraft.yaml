@@ -1,5 +1,5 @@
 name: wott-agent
-version: '0.1.5.0-18'
+version: '0.1.5.0-19'
 summary: Web of Trusted Things agent.
 description: |
   tl;dr - WoTT Agent is the Let's Encrypt for IoT.
@@ -14,7 +14,7 @@ architectures:
 
 apps:
   daemon:
-    command: wott-agent
+    command: wott-agent daemon
     daemon: oneshot
     plugs:
       - firewall-control
@@ -24,12 +24,16 @@ apps:
       - tpm
     passthrough:
       timer: 00:00-24:00/24
+    environment:
+      XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
 
   wott-agent:
     command: wott-agent
     plugs:
       - network
       - network-observe
+    environment:
+      XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
 
   ghostunnel:
     command: ghostunnel
@@ -51,6 +55,18 @@ apps:
 
   whoami:
     command: python3 -c 'import agent; print(agent.get_device_id())'
+    environment:
+      XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
+
+  test-cert:
+    command: python3 -c 'import agent; print(agent.say_hello())'
+    environment:
+      XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
+
+  portscan:
+    command: python3 -c 'import agent; print(agent.get_open_ports())'
+    environment:
+      XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
 
   verify-cert:
     command: openssl verify -CAfile "$SNAP_DATA/ca.crt" "$SNAP_DATA/client.crt"
@@ -58,11 +74,6 @@ apps:
   inspect-cert:
     command: openssl x509 -in "$SNAP_DATA/client.crt" -text -noout
 
-  test-cert:
-    command: python3 -c 'import agent; print(agent.say_hello())'
-
-  portscan:
-    command: python3 -c 'import agent; print(agent.get_open_ports())'
 
 slots:
   wott-certs:
