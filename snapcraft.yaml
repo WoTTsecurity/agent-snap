@@ -11,6 +11,9 @@ architectures:
   - arm64
   - amd64
   - i386
+layout:
+  /opt/wott:
+    bind: $SNAP_DATA/opt/wott
 
 apps:
   daemon:
