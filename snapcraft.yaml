@@ -13,7 +13,11 @@ architectures:
   - i386
 layout:
   /opt/wott:
-    bind: $SNAP_DATA/opt/wott
+    bind: $SNAP_DATA
+  /opt/wott/certs:
+    bind: $SNAP_COMMON/certs
+  /opt/wott/credentials:
+    bind: $SNAP_COMMON/credentials
 
 apps:
   daemon:
