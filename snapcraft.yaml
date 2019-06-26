@@ -11,13 +11,6 @@ architectures:
   - arm64
   - amd64
   - i386
-layout:
-  /opt/wott:
-    bind: $SNAP_DATA
-  /opt/wott/certs:
-    bind: $SNAP_COMMON/certs
-  /opt/wott/credentials:
-    bind: $SNAP_COMMON/credentials
 
 apps:
   daemon:
@@ -33,6 +26,9 @@ apps:
       timer: 00:00-24:00/24
     environment:
       XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
+      CONFIG_PATH: $SNAP_DATA
+      CERT_PATH: $SNAP_COMMON/certs
+      CREDENTIALS_PATH: $SNAP_COMMON/credentials
 
   wott-agent:
     command: wott-agent
@@ -41,6 +37,9 @@ apps:
       - network-observe
     environment:
       XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
+      CONFIG_PATH: $SNAP_DATA
+      CERT_PATH: $SNAP_COMMON/certs
+      CREDENTIALS_PATH: $SNAP_COMMON/credentials
 
   ghostunnel:
     command: ghostunnel
@@ -61,19 +60,28 @@ apps:
       - network-bind
 
   whoami:
-    command: python3 -c 'import agent; print(agent.get_device_id())'
+    command: wott-agent whoami
     environment:
       XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
+      CONFIG_PATH: $SNAP_DATA
+      CERT_PATH: $SNAP_COMMON/certs
+      CREDENTIALS_PATH: $SNAP_COMMON/credentials
 
   test-cert:
-    command: python3 -c 'import agent; print(agent.say_hello())'
+    command: wott-agent test-cert
     environment:
       XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
+      CONFIG_PATH: $SNAP_DATA
+      CERT_PATH: $SNAP_COMMON/certs
+      CREDENTIALS_PATH: $SNAP_COMMON/credentials
 
   portscan:
-    command: python3 -c 'import agent; print(agent.get_open_ports())'
+    command: wott-agent portscan
     environment:
       XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
+      CONFIG_PATH: $SNAP_DATA
+      CERT_PATH: $SNAP_COMMON/certs
+      CREDENTIALS_PATH: $SNAP_COMMON/credentials
 
   verify-cert:
     command: openssl verify -CAfile "$SNAP_DATA/ca.crt" "$SNAP_DATA/client.crt"
