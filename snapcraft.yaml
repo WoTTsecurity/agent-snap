@@ -22,8 +22,6 @@ apps:
       - network
       - network-observe
       - tpm
-    passthrough:
-      timer: 00:00-24:00/24
     environment:
       XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
       CONFIG_PATH: $SNAP_DATA
@@ -77,11 +75,11 @@ parts:
   wott-agent:
     plugin: python
     python-version: python3
-    source: https://github.com/GreatFruitOmsk/agent.git
+    source: https://github.com/WoTTsecurity/agent.git
     requirements:
       - requirements.txt
     source-type: git
-    source-branch: fix-snap
+    source-branch: master
     build-packages:
       - python3-git
       - libffi-dev
