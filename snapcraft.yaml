@@ -15,7 +15,7 @@ architectures:
 apps:
   daemon:
     command: wott-agent daemon
-    daemon: oneshot
+    daemon: simple
     plugs:
       - firewall-control
       - hardware-observe
@@ -58,30 +58,6 @@ apps:
     plugs:
       - network
       - network-bind
-
-  whoami:
-    command: wott-agent whoami
-    environment:
-      XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
-      CONFIG_PATH: $SNAP_DATA
-      CERT_PATH: $SNAP_COMMON/certs
-      CREDENTIALS_PATH: $SNAP_COMMON/credentials
-
-  test-cert:
-    command: wott-agent test-cert
-    environment:
-      XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
-      CONFIG_PATH: $SNAP_DATA
-      CERT_PATH: $SNAP_COMMON/certs
-      CREDENTIALS_PATH: $SNAP_COMMON/credentials
-
-  portscan:
-    command: wott-agent portscan
-    environment:
-      XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
-      CONFIG_PATH: $SNAP_DATA
-      CERT_PATH: $SNAP_COMMON/certs
-      CREDENTIALS_PATH: $SNAP_COMMON/credentials
 
   verify-cert:
     command: openssl verify -CAfile "$SNAP_DATA/ca.crt" "$SNAP_DATA/client.crt"
