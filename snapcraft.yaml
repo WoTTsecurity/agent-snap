@@ -76,8 +76,7 @@ parts:
     plugin: python
     python-version: python3
     source: https://github.com/WoTTsecurity/agent.git
-    requirements:
-      - requirements.txt
+    requirements: [ 'requirements.txt' ]
     source-type: git
     source-branch: master
     build-packages:
@@ -99,7 +98,7 @@ parts:
     build-packages:
       - build-essential
       - libltdl-dev
-      
+
   tools:
     source: bin/
     plugin: dump
