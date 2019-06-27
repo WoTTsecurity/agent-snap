@@ -77,7 +77,7 @@ parts:
     python-version: python3
     source: https://github.com/WoTTsecurity/agent.git
     requirements:
-      - 'requirements.txt'
+      - requirements.txt
     source-type: git
     source-branch: master
     build-packages:
