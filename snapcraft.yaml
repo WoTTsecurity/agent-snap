@@ -6,11 +6,6 @@ description: |
 grade: stable
 confinement: strict
 base: core18
-architectures:
-  - armhf
-  - arm64
-  - amd64
-  - i386
 
 apps:
   daemon:
