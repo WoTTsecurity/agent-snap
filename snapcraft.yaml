@@ -1,5 +1,5 @@
 name: wott-agent
-version: '0.1.5.0-19'
+version: '0.1.5.0-26'
 summary: Web of Trusted Things agent.
 description: |
   tl;dr - WoTT Agent is the Let's Encrypt for IoT.
@@ -9,13 +9,20 @@ base: core18
 
 apps:
   daemon:
-    command: wott-agent daemon
+    command: bin/snapcraft-preload $SNAP/bin/wott-agent daemon
     daemon: simple
     plugs:
       - firewall-control
       - hardware-observe
       - network
+      - network-setup-control
+      - network-bind
       - network-observe
+      - network-control
+      - process-control
+      - system-observe
+      - account-control
+      - log-observe
       - tpm
     environment:
       XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
@@ -26,8 +33,15 @@ apps:
   wott-agent:
     command: wott-agent
     plugs:
+      - firewall-control
+      - hardware-observe
       - network
       - network-observe
+      - network-control
+      - system-observe
+      - account-control
+      - log-observe
+      - tpm
     environment:
       XTABLES_LIBDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xtables
       CONFIG_PATH: $SNAP_DATA
@@ -67,6 +81,19 @@ slots:
       - $SNAP_DATA
 
 parts:
+  snapcraft-preload:
+    source: https://github.com/diddlesnaps/snapcraft-preload.git
+    source-type: git
+    source-branch: semaphore-support
+    plugin: cmake
+    build-packages:
+      - on amd64:
+        - gcc-multilib
+        - g++-multilib
+      - else:
+        - gcc
+        - g++
+
   wott-agent:
     plugin: python
     python-version: python3
