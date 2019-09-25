@@ -121,6 +121,8 @@ parts:
     build-packages:
       - build-essential
       - libltdl-dev
+    stage-packages:
+      - libltdl7
 
   tools:
     source: bin/
