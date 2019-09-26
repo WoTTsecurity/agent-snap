@@ -7,7 +7,17 @@ Packages the WoTT Agent into a Snap.
 ## Installing
 
 ```
-$ snap install wott-agent
+$ sudo snap install wott-agent
+```
+The "unsafe" interfaces needed by this snap are not auto-connected (may change in the future). Manual connection is needed:
+```
+$ sudo snap connect wott-agent:network-control :network-control
+$ sudo snap connect wott-agent:network-setup-control :network-setup-control
+$ sudo snap connect wott-agent:process-control :process-control
+$ sudo snap connect wott-agent:system-observe :system-observe
+$ sudo snap connect wott-agent:firewall-control :firewall-control
+$ sudo snap connect wott-agent:account-control :account-control
+$ sudo snap connect wott-agent:log-observe :log-observe
 ```
 
 ## Building (locally)
