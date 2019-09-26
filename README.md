@@ -1,3 +1,5 @@
+[![wott-agent](https://snapcraft.io/wott-agent/badge.svg)](https://snapcraft.io/wott-agent)
+
 # (Ubuntu) Snap for WoTT Agent
 
 Packages the WoTT Agent into a Snap.
