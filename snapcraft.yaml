@@ -112,6 +112,8 @@ parts:
       - libsystemd-dev
     stage-packages:
       - iptables
+      - python3-selinux
+      - python3-apparmor
 
   ghostunnel:
     plugin: go
